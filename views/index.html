@@ -1,9 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>DELI-VERY</title>
+     
+   <head>
+        <title>BIFFENS BURGER</title>
+       <meta charset="utf-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1">  
+ 
+       <link rel="stylesheet" type="text/css" href="style.css">
+       <script src="/socket.io/socket.io.js" defer></script>
+       
+        <script src="/vue/vue.js" defer></script>
+       <script type="text/javascript" src="js/menu.js"></script>
+        <script src="js/vue_script.js" defer></script>
+       
+       <!--<script src="js/deli-very.js" defer></script>-->
+       
+       <!--<script src="js/js_script.js"></script>-->
+       <!--<script src="https://vuejs.org/js/vue.js" ></script>-->
+     
+       <link rel="stylesheet" href="css/deli-very.css">
+       <!-- <h1>Välkommen till Biffens burgare</h1> -->
+       <img src=" https://cdn2.cdnme.se/3330886/8-3/picturetopeopleorg-dee3e101cb3f33957ef36cdb18eda58253175bdcdf71b1d9f3_5dd41f309606ee2f339af465.png" width="300" height="300" class="center">
+       <img src="https://icon-library.net/images/burger-icon-png/burger-icon-png-24.jpg" width="100" height="100"  class="icon">
+      
+    
+      
+       
+       
+    
+            
     </head>
-    <body>
-        <h1>Hello World!!!</h1>
+    
+    <body>         
+        <main id="menu">
+    
+    
+           <section id="hej">
+               
+            
+              
+
+                   
+          
+                <img src=" https://cdn2.cdnme.se/3330886/8-3/picturetopeopleorg-5bcf1348d52dbe64b5e5a544c6dd32919e7ca675a2521967d6_5dd420a0ddf2b31b70c310c3.png" width="1000" height="100" class="head1">
+
+                <!--<h2>Här kan du beställa din egen burgare</h2>
+                <p>Nedan hittar du vilka burgare vi på Biffen erbjuder</p>-->
+        
+<ul class="grid">
+
+    <div v-for="burger in burgers"  class="box"> 
+        
+        
+            <p align="center"> <b>{{burger.name }}</b> </p>   
+       
+       <img v-bind:src="burger.img" width="450" height="300"  class="burger">
+        <dl>
+            <dd>{{ burger.kCal }}</dd> <br>
+<dt><font size="4"><b>Ingriedents:</b></font></dt>
+            <dd><font size="4">{{ burger.ingredients }}</font></dd>
+        
+             <dt><font size="4"><b>Allergener:</b></font></dt>
+            <dd><font size="4"><span v-if="burger.lactose">Lactose</span></font></dd>
+            <dd><font size="4"><span v-if="burger.gluten">Gluten</span></font></dd>
+        </dl>
+ <img src=" https://cdn2.cdnme.se/3330886/8-3/order_5ddfc5362a6b2221ac8d64a6.png" width="100" height="60"  >
+    <label class="container">
+  
+            <input type="checkbox" id="checkbox" v-model="checked" :value="burger.name">
+
+        </label>
+    </div>
+ </ul>            
+<!--<ul id="myID">
+<h1>
+   {{ arbitraryVariableName }}
+   </h1> 
+   <li v-for="burger in burgers" >
+
+{{burger.productname }}
+{{burger.kcal }}
+<span v-if="burger.lactose">Laktos</span>
+<span v-if="burger.gluten">Gluten</span>
+     </div>
+
+</ul>-->
+    
+    
+  <!--              <div class="wrapper">
+                   <div class="box a">
+
+                        <p align="center">HALLOUMI </p>  
+                       <img src="https://www.burgerking.se/011_se/Product%20images/Burgers/image-thumb__13429__product_detail/Tryffel_Halloumi_hemsida_App.png" width="440" height="300" alt="Sunset in Uppsala" title="Sunset">
+                       <dl class="describetext">
+                           <dt><b>Halloumiburgare med tomat</b></dt><br />
+                                    <dd>smakrik cajunsås</dd>
+                                    <dd>ost</dd>
+                                    <dd>sallad</dd>
+                                    <dd>tomat</dd><br /><br />
+                                <dt><b>Allergener</b></dt><br />
+                                    <dd class="allegener">
+                                        Innehållande gluten
+                                    </dd>
+                                    <dd class="allegener">Mjölkprodukter</dd>
+                                    <dd class="allegener">Ägg</dd>
+                            </dl>
+                       </div>
+                    <div class="box b">
+                         <p align="center">BEEF </p>  
+                        <img src="https://www.burgerking.se/011_se/Product%20images/Burgers/image-thumb__13426__product_detail/Tryffel_Double_Hemsida_App.png" width="440" height="300" alt="Sunset in Uppsala" title="Sunset">
+                        <dl class="describetext">
+                                <dt><b>Tryffelburgare med nötkött</b></dt><br />
+                                    <i><dd>Rostad lök</dd>
+                                    <dd>ost</dd>
+                                    <dd>tryffelmajonäs</dd></i><br />
+                                <dt><b>Allergener</b></dt><br />
+                                    <dd class="allegener">Mjölkprodukter</dd>
+                                    <dd class="allegener">Ägg</dd><br />
+                            </dl>
+                    </div>
+                       <div class="box c">
+            
+                        <p align="center">CHICKEN </p>  
+                            <img src="https://www.burgerking.se/011_se/Product%20images/Burgers/image-thumb__13428__product_detail/Tryffel_Chicken_Hemsida_App.png" width="440" height="300" alt="Sunset in Uppsala" title="Sunset">
+                 
+                            <dl class="describetext">
+                                <dt><b>Kycklingburgare med fräsch sallad</b></dt><br />
+                                    <dd>rostad lök</dd>
+                                    <dd>ost</dd>
+                                    <dd>sallad</dd>
+                                    <dd>tryffelmajonäs</dd><br />
+                                <dt><b>Allergener</b></dt><br />
+                                    <dd class="allegener">Innehållande gluten</dd>
+                                    <dd class="allegener">Ägg</dd><br />
+                            </dl>
+                     
+                        </div>
+               </div>-->
+               
+
+            </section>
+             
+            
+            <img src="https://cdn2.cdnme.se/3330886/8-3/picturetopeopleorg-e614cf45281b254535b1660ceb30f4067fa8c9895972bfb145_5dd4631be087c3496ff454ec.png" width="1000" height="100"  class="head2">
+            <section id="info" class="information">
+               
+                
+                    <h1 align="center">Customer information</h1>
+                 
+                
+                    <p align="center">This is where you provide neccessary information: </p>
+ 
+
+         
+                    <p align="center">
+                        <label  for="fullname">Full name</label> <br>
+                        <input v-model="orderobject.Fullname" type="text" id="fullname" name="fn" required="required" placeholder="First- and Last name" class="inputfield">
+                          
+                    </p>
+                    <p align="center">
+                        <label for="email">Email</label><br>
+                        <input v-model="orderobject.Email" type="email" id="email" name="em" required="required" placeholder="E-mail address" class="inputfield">
+                    </p>
+                  
+                   
+                    <p align="center">
+                        <label for="paymentmethod">Payment Method</label><br>
+                        <select  v-model="orderobject.Paymentmethod" id="paymentmethod" name="pm">
+                            <option>Credit/Debit</option>
+                            <option>Invoice</option>
+                            <option>Gift Card</option>
+                            <option>PayPal</option>
+                        </select>
+                    </p>
+                    <p align="center">
+                        <label for="gender">Gender</label><br>
+                        <input v-model="orderobject.Gender" type="radio" name="gender" value="male"> Male<br>
+                        <input v-model="orderobject.Gender" type="radio" name="gender" value="female"> Female<br>
+                        <input  v-model="orderobject.Gender" type="radio" name="gender" value="other"> Other
+                    </p>
+                    
+           
+                
+                <h3 align="center"> Please indicate point of delivery: </h3>
+  <a href="/dispatcher" target="_blank"> hejhej </a> <!-- TAgit bort text till länken dispatcher-->
+  <div class="view-box">
+    <div id="dots" v-on:click="displayOrder">
+       
+        <!-- v-for="(order, key) in orders"
+          v-bind:style="{ left: order.details.x + 'px', top: order.details.y + 'px'}">
+          {{key}} -->
+
+            <div
+            v-bind:style="{ left: deliveryLocation.x + 'px', top: deliveryLocation.y + 'px'}">
+            T
+          </div>
+            </div>
+                </div>
+        
+              <span v-if="orderplaced"> 
+            
+                  <h1>Your order:</h1> 
+                    Ordered burgers: 
+                  <span v-for="value in checked">  {{ value }} </span>
+                 
+                       
+  <dd v-for="(value, name) in orderobject">
+   {{ name }}: {{ value }}
+
+    
+<!---{{ orderobject.Gender }}
+<span v-show = "orderplaced"> {{markDone()}}</span>-->
+  </dd>
+
+</span>
+          
+            </section>
+            
+            
+
+
+            <button  v-on:click="markDone(key), ordered(), addOrder()"  class="placeorder"><img src="https://img.icons8.com/emoji/2x/hamburger-emoji.png" > <font face="Courier new" size="6" class="textorder"> 
+                <dd>
+                
+
+                </dd>
+                
+                PLACE MY ORDER </font>
+
+            </button>
+
+
+        </main>
+
     </body>
+        <footer>
+            
+
+             
+        </footer>
+    
+
 </html>
+
+ 
